@@ -1,4 +1,0 @@
-/home/witty-me/Video/build/CMakeFiles/rebuild_cache.dir
-/home/witty-me/Video/build/CMakeFiles/seriallib.dir
-/home/witty-me/Video/build/CMakeFiles/edit_cache.dir
-/home/witty-me/Video/build/CMakeFiles/DisplayVideo.dir
