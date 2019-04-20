@@ -1,0 +1,2 @@
+/usr/bin/ar qc libserial/list_ports_linux.cc.a  CMakeFiles/serial/list_ports_linux.cc.dir/serial/list_ports_osx.cc.o CMakeFiles/serial/list_ports_linux.cc.dir/serial/list_ports_win.cc.o CMakeFiles/serial/list_ports_linux.cc.dir/serial/serial.cc.o CMakeFiles/serial/list_ports_linux.cc.dir/serial/unix.cc.o CMakeFiles/serial/list_ports_linux.cc.dir/serial/win.cc.o
+/usr/bin/ranlib libserial/list_ports_linux.cc.a
