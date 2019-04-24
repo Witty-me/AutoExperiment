@@ -18,6 +18,11 @@ class VideoAnalysis
     static Mat frame;
 
     //trackers used to track the bold lines
+    //NOTIFICATION: LF means Left Front of the car, which is different from the orientation of the camera
+    //              LF is located at bottom right of the frame, actually
+    //              LB is located at top right of the frame, actually
+    //              RF is located at bottom left of the frame, actually
+    //              RB is located at top left of the frame, actually
     static Ptr<Tracker> trackerLF;
     static Ptr<Tracker> trackerLB;
     static Ptr<Tracker> trackerRF;

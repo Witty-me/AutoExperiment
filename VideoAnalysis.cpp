@@ -24,6 +24,8 @@ bool VideoAnalysis::init(const string &src_)
 
     namedWindow("Camera");
     cam >> frame;
+    //The rectangle selection order:
+    //bottom right -> top right -> bottom left -> top left
     roiLF = selectROI("Camera", frame);
     roiLB = selectROI("Camera", frame);
     roiRF = selectROI("Camera", frame);
