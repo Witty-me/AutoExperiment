@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
-project( DisplayImage )
+project( AutoExperiment )
 set(CMAKE_CXX_STANDARD 11)
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-add_executable( DisplayVideo DisplayVideo.cpp )
+add_executable(AutoExperiment MotorControl.cpp VideoAnalysis.cpp AutoExperiment.cpp)
 
 add_library(seriallib STATIC
     "serial/list_ports_linux.cc"
@@ -13,5 +13,5 @@ add_library(seriallib STATIC
 	"serial/unix.cc"
 	"serial/win.cc")
 
-target_link_libraries( DisplayVideo ${OpenCV_LIBS})
-target_link_libraries( DisplayVideo seriallib)
+target_link_libraries( AutoExperiment ${OpenCV_LIBS})
+target_link_libraries( AutoExperiment seriallib)
