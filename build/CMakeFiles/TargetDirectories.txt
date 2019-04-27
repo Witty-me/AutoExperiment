@@ -1,4 +1,0 @@
-/home/witty-me/AutoExperiment/build/CMakeFiles/edit_cache.dir
-/home/witty-me/AutoExperiment/build/CMakeFiles/rebuild_cache.dir
-/home/witty-me/AutoExperiment/build/CMakeFiles/seriallib.dir
-/home/witty-me/AutoExperiment/build/CMakeFiles/AutoExperiment.dir
