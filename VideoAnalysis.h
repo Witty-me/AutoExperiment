@@ -3,6 +3,8 @@
 #include <opencv2/tracking.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <string>
+#include <sstream>
+#include <iostream>
 #include "MotorControl.h"
 
 using namespace cv;

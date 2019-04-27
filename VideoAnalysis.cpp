@@ -92,7 +92,29 @@ void VideoAnalysis::control()
         }
         else
         {
-            MotorControl::keep_static();
+            //read the QR code and update current position
+            string QR = decodeQR();
+            if(QR.length() > 0)
+            {
+                std::istringstream is(QR);
+                unsigned currPos;
+                is >> currPos;
+                std::cerr << "DEBUG: pos = " << currPos << std::endl;
+                MotorControl::update_curr_pos(currPos);
+            }
+
+            if(MotorControl::get_curr_pos() > MotorControl::get_target_pos())
+            {
+                MotorControl::move_backward();
+            }
+            else if(MotorControl::get_curr_pos() < MotorControl::get_target_pos())
+            {
+                MotorControl::move_forward();
+            }
+            else
+            {
+                MotorControl::keep_static();
+            }
         }
     }
 }
