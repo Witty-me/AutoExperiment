@@ -32,7 +32,7 @@ void scanner()
 
 int main(int argc, char **argv)
 {
-    MotorControl::init("/dev/ttyUSB1");
+    MotorControl::init("192.168.1.1");
     VideoAnalysis::init("http://192.168.1.1:8080/?action=stream?dummy=param.mjpg");
     
     std::thread scanner_thread(scanner);
@@ -41,7 +41,6 @@ int main(int argc, char **argv)
     while (1)
     {
         VideoAnalysis::refresh_and_control();
-        //std::cout << "Detected QR code: " << VideoAnalysis::decodeQR() << std::endl;
         if (waitKey(30) >= 0)
             break;
     }

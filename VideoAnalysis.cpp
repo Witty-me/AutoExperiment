@@ -63,7 +63,7 @@ void VideoAnalysis::control()
 {
     control_turn++;
     //in three quarters of the time, give no commands
-    if (control_turn % 20 > 5)
+    if (control_turn % 20 > 12)
     {
         MotorControl::keep_static();
         return;
@@ -99,7 +99,7 @@ void VideoAnalysis::control()
                 std::istringstream is(QR);
                 unsigned currPos;
                 is >> currPos;
-                std::cerr << "DEBUG: pos = " << currPos << std::endl;
+                //std::cerr << "DEBUG: pos = " << currPos << std::endl;
                 MotorControl::update_curr_pos(currPos);
             }
 

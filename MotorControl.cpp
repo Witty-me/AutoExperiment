@@ -31,7 +31,10 @@ void MotorControl::init(const string& dest_)
         std::cerr << "Create mosquitto client failed" << std::endl;
     }
     dest = dest_;
-    mosquitto_connect(mosq, dest.c_str(), port, 60);
+    if(mosquitto_connect(mosq, dest.c_str(), port, 60) != MOSQ_ERR_SUCCESS)
+    {
+        std::cerr << "Connect to mosquitto failed" << std::endl;
+    }
 }
 void MotorControl::send_msg(uint8_t *msg_)
 {
@@ -41,8 +44,11 @@ void MotorControl::send_msg(uint8_t *msg_)
     // pubmsg.qos = 1;
     // pubmsg.retained = 0;
     // MQTTClient_publishMessage(MotorControl::motor, "MC", &pubmsg, NULL);
-
-    mosquitto_publish(mosq, NULL, "MC", MSG_LEN, msg_, 1, 0);
+    //std::cerr << "DEBUG: send msg" << std::endl;
+    if(mosquitto_publish(mosq, NULL, "ldscar/uart1/send", MSG_LEN, msg_, 0, 0) != MOSQ_ERR_SUCCESS)
+    {
+        std::cerr << "Unable to send control message" << std::endl;
+    }
 }
 #endif
 
