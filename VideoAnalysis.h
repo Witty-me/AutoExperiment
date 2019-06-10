@@ -44,6 +44,9 @@ class VideoAnalysis
     //the medium of each frame, need to be changed when resolution changes
     constexpr static const double mid_x = 1280 / 2;
     constexpr static const double mid_y = 720 / 2;
+    
+    //this variable is set to true if the car has moved to the target position
+    static bool finished;
 
   public:
     //need to be called before used
@@ -60,4 +63,10 @@ class VideoAnalysis
 
     //return the string of detected QR code, string empty if no code detected
     static string decodeQR();
+
+    //set variable "finished" to true if the car just reached the target position
+    static void set_finished();
+
+    //return whether the car has moved to the target position
+    static bool is_finished();
 };

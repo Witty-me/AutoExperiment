@@ -3,10 +3,9 @@ project( AutoExperiment )
 set(CMAKE_CXX_STANDARD 11)
 find_package( OpenCV REQUIRED )
 find_package(Threads)
-#find_package(FORTE_COM_PAHOMQTT)
-#include_directories( ${FORTE_COM_PAHOMQTT_INCLUDE_DIR} )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 add_executable(AutoExperiment MotorControl.cpp VideoAnalysis.cpp AutoExperiment.cpp)
+add_executable(AE_router MotorControl.cpp VideoAnalysis.cpp AE_router.cpp)
 
 add_library(seriallib STATIC
     "serial/list_ports_linux.cc"
@@ -19,5 +18,9 @@ add_library(seriallib STATIC
 target_link_libraries( AutoExperiment ${OpenCV_LIBS})
 target_link_libraries( AutoExperiment seriallib)
 target_link_libraries( AutoExperiment ${CMAKE_THREAD_LIBS_INIT})
-#target_link_libraries( AutoExperiment ${FORTE_COM_PAHOMQTT_LIB})
 target_link_libraries (AutoExperiment  mosquitto)
+
+target_link_libraries( AE_router ${OpenCV_LIBS})
+target_link_libraries( AE_router seriallib)
+target_link_libraries( AE_router ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries (AE_router  mosquitto)

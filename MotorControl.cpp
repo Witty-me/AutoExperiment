@@ -54,32 +54,32 @@ void MotorControl::send_msg(uint8_t *msg_)
 
 void MotorControl::rotate_counterclockwise()
 {
-    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 0, 0, 1, 1};
+    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 0, 0, 20, 1};
     MotorControl::send_msg(message);
 }
 void MotorControl::rotate_clockwise()
 {
-    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 0, 0, 1, 0};
+    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 0, 0, 20, 0};
     MotorControl::send_msg(message);
 }
 void MotorControl::translation_left()
 {
-    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 1, 0, 0, 0, 0, 4};
+    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 20, 0, 0, 0, 0, 4};
     MotorControl::send_msg(message);
 }
 void MotorControl::translation_right()
 {
-    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 1, 0, 0, 0, 0, 0};
+    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 20, 0, 0, 0, 0, 0};
     MotorControl::send_msg(message);
 }
 void MotorControl::move_forward()
 {
-    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 3, 0, 0, 0};
+    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 60, 0, 0, 0};
     MotorControl::send_msg(message);
 }
 void MotorControl::move_backward()
 {
-    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 3, 0, 0, 2};
+    uint8_t message[MSG_LEN] = {0xff, 0xfe, 1, 0, 0, 0, 60, 0, 0, 2};
     MotorControl::send_msg(message);
 }
 void MotorControl::keep_static()

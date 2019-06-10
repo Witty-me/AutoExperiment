@@ -12,6 +12,7 @@ Rect2d VideoAnalysis::roiRF;
 Rect2d VideoAnalysis::roiRB;
 uint32_t VideoAnalysis::control_turn = 0;
 QRCodeDetector VideoAnalysis::qrd = QRCodeDetector();
+bool VideoAnalysis::finished = false;
 
 bool VideoAnalysis::init(const string &src_)
 {
@@ -63,7 +64,7 @@ void VideoAnalysis::control()
 {
     control_turn++;
     //in three quarters of the time, give no commands
-    if (control_turn % 20 > 12)
+    if (control_turn % 20 > 4)
     {
         MotorControl::keep_static();
         return;
@@ -72,23 +73,24 @@ void VideoAnalysis::control()
     double F_x_pos = (roiLF.x + roiLF.width / 2 + roiRF.x + roiRF.width / 2) / 2;
     double B_x_pos = (roiLB.x + roiLB.width / 2 + roiRB.x + roiRB.width / 2) / 2;
     double x_pos = (F_x_pos + B_x_pos) / 2;
+    std::cerr << "DEBUG: s_pos = " << x_pos << std::endl;
     if (x_pos > mid_x * 1.05)
     {
-        MotorControl::translation_left();
+        MotorControl::translation_right();
     }
     else if (x_pos < mid_x * 0.95)
     {
-        MotorControl::translation_right();
+        MotorControl::translation_left();
     }
     else
     {
         if (F_x_pos > B_x_pos * 1.05)
         {
-            MotorControl::rotate_counterclockwise();
+            MotorControl::rotate_clockwise();
         }
         else if (B_x_pos > F_x_pos * 1.05)
         {
-            MotorControl::rotate_clockwise();
+            MotorControl::rotate_counterclockwise();
         }
         else
         {
@@ -114,6 +116,7 @@ void VideoAnalysis::control()
             else
             {
                 MotorControl::keep_static();
+                set_finished();   
             }
         }
     }
@@ -127,4 +130,14 @@ void VideoAnalysis::refresh_and_control()
 string VideoAnalysis::decodeQR()
 {
     return qrd.detectAndDecode(frame);
+}
+
+void VideoAnalysis::set_finished()
+{
+    finished = true;
+}
+
+bool VideoAnalysis::is_finished()
+{
+    return finished;
 }
