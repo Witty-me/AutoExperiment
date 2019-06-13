@@ -14,6 +14,16 @@ uint32_t VideoAnalysis::control_turn = 0;
 QRCodeDetector VideoAnalysis::qrd = QRCodeDetector();
 bool VideoAnalysis::finished = false;
 
+void VideoAnalysis::clarify(Mat& frame_)
+{
+    for(int y = 0; y < frame_.rows; y++)
+        for(int x = 0; x < frame_.cols; x++)
+            for(int c = 0; c < 3; c++)
+            {
+                frame_.at<Vec3b>(y, x)[c] = saturate_cast<uchar>(10 * frame_.at<Vec3b>(y, x)[c] - 1500);
+            }
+}
+
 bool VideoAnalysis::init(const string &src_)
 {
     cam.open(src_);
@@ -25,6 +35,7 @@ bool VideoAnalysis::init(const string &src_)
 
     namedWindow("Camera");
     cam >> frame;
+    clarify(frame);
     //The rectangle selection order:
     //bottom right -> top right -> bottom left -> top left
     roiLF = selectROI("Camera", frame);
@@ -54,6 +65,7 @@ void VideoAnalysis::refresh()
     trackerLB->update(frame, roiLB);
     trackerRF->update(frame, roiRF);
     trackerRB->update(frame, roiRB);
+    clarify(frame);
     rectangle(frame, roiLF, Scalar(255, 0, 0), 2, 1);
     rectangle(frame, roiLB, Scalar(0, 255, 0), 2, 1);
     rectangle(frame, roiRF, Scalar(0, 0, 255), 2, 1);
@@ -73,7 +85,7 @@ void VideoAnalysis::control()
     double F_x_pos = (roiLF.x + roiLF.width / 2 + roiRF.x + roiRF.width / 2) / 2;
     double B_x_pos = (roiLB.x + roiLB.width / 2 + roiRB.x + roiRB.width / 2) / 2;
     double x_pos = (F_x_pos + B_x_pos) / 2;
-    std::cerr << "DEBUG: s_pos = " << x_pos << std::endl;
+    
     if (x_pos > mid_x * 1.05)
     {
         MotorControl::translation_right();

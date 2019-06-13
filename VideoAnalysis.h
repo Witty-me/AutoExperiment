@@ -48,6 +48,8 @@ class VideoAnalysis
     //this variable is set to true if the car has moved to the target position
     static bool finished;
 
+    static void clarify(Mat& frame_);
+
   public:
     //need to be called before used
     static bool init(const string &src_);
