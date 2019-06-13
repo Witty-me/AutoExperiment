@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     }
     MotorControl::init(argv[1]);
     
-    char buf[100] = {'h', 't', 't', 'p', ':', '/', '/'};
+    char buf[100] = {'h', 't', 't', 'p', ':', '/', '/', '\0'};
     strcat(buf, argv[1]);
     strcat(buf, ":8080/?action=stream?dummy=param.mjpg");
     printf("%s\n", buf);
