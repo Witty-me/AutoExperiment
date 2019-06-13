@@ -48,6 +48,7 @@ class VideoAnalysis
     //this variable is set to true if the car has moved to the target position
     static bool finished;
 
+    //treat the incoming image frame to decode the QR code successfully
     static void clarify(Mat& frame_);
 
   public:
